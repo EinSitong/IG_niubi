@@ -3,13 +3,13 @@ import pygame
 import csv
 from pygame.sprite import Group
 
-from settings import Settings
-from game_stats import GameStats
-from back import Background, Cover
-from xiaozhang import Xiaozhang
-from buttons import Button
-from window import Window
-import game_functions as gf
+from game_modules.settings import Settings
+from game_modules.game_stats import GameStats
+from game_modules.back import Background, Cover
+from game_modules.xiaozhang import Xiaozhang
+from game_modules.buttons import Button
+from game_modules.window import Window
+import game_modules.game_functions as gf
 
 
 def run_game():
@@ -97,12 +97,12 @@ def run_game():
         if stats.game_over:
 
             # 保存分数
-            with open("game_packages/scores.txt", 'w') as file_object:
+            with open("game_data/scores.txt", 'w') as file_object:
                 for score in stats.scores:
                     file_object.write(str(score) + '\n')
 
             # 保存游戏数据
-            with open("game_packages/game_data.csv", 'w') as f:
+            with open("game_data/game_data.csv", 'w') as f:
                 headers = [key for key in stats.game_data]
                 writer = csv.DictWriter(f, fieldnames=headers)
                 writer.writeheader()

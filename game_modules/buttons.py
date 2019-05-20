@@ -6,17 +6,17 @@ class Button:
 
     def __init__(self, ig_settings, screen, photo_name, msg):
         """初始化按钮设置"""
-        
+
         self.ig_settings = ig_settings
         self.screen = screen
 
         # 有效标志.
         self.valid_flag = True
-        
+
         # 按钮图片及其位置设置
         self.image = pygame.image.load(photo_name)
         self.rect = self.image.get_rect()
-        
+
         # 文字设置
         self.font = pygame.font.SysFont('SimHei', 32)
         self.msg_image = self.font.render(msg, True, (230, 220, 180))

@@ -3,14 +3,14 @@ import csv
 
 class GameStats:
     """游戏数据与Flag"""
-    
+
     def __init__(self, ig_settings):
         """初始化数据与Flag"""
 
         self.ig_settings = ig_settings
 
         # 游戏数据读取
-        with open("game_packages/game_data.csv") as f:
+        with open("game_data/game_data.csv") as f:
             dictreader = csv.DictReader(f)
             game_data = next(dictreader)
             for key, value in game_data.items():
@@ -18,7 +18,7 @@ class GameStats:
             self.game_data = game_data
 
         # 最高分数据读取
-        with open("game_packages/scores.txt") as file_object:
+        with open("game_data/scores.txt") as file_object:
             scores = [int(score.rstrip()) for score in file_object]
         self.scores = sorted(scores, reverse=True)[0:12]
 

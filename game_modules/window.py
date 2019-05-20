@@ -1,5 +1,5 @@
 import pygame
-from buttons import Button
+from game_modules.buttons import Button
 
 
 class Window:
@@ -30,16 +30,19 @@ class Window:
         # 按钮设置.
         self.buttons = dict()
 
-        self.buttons["quit"] = Button(ig_settings, screen, "images/win_quit.png", '')
+        self.buttons["quit"] = Button(
+            ig_settings, screen, "images/win_quit.png", '')
         self.buttons["quit"].rect.topright = self.rect.topright
         self.buttons["quit"].image_equal_rect()
 
-        self.buttons["yes"] = Button(ig_settings, screen, "images/win_yes.png", "是")
+        self.buttons["yes"] = Button(
+            ig_settings, screen, "images/win_yes.png", "是")
         self.buttons["yes"].rect.top = self.rect.top + 157
         self.buttons["yes"].rect.left = self.rect.left + 77
         self.buttons["yes"].image_equal_rect()
 
-        self.buttons["no"] = Button(ig_settings, screen, "images/win_no.png", "否")
+        self.buttons["no"] = Button(
+            ig_settings, screen, "images/win_no.png", "否")
         self.buttons["no"].rect.top = self.rect.top + 157
         self.buttons["no"].rect.right = self.rect.right - 77
         self.buttons["no"].image_equal_rect()

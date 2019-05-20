@@ -2,9 +2,9 @@ import pygame
 import time
 import random
 
-from buttons import Button
-from hot_dogs import HotDog
-from dogfaces import DogFace
+from game_modules.buttons import Button
+from game_modules.hot_dogs import HotDog
+from game_modules.dogfaces import DogFace
 
 
 # functions for events geted.
@@ -103,7 +103,8 @@ def check_keydowm_events(event, ig_settings, stats, xiaozhang, hot_dogs):
 
     elif event.key == pygame.K_a:
         xiaozhang.moving_left = True
-        xiaozhang.image = pygame.transform.flip(xiaozhang.raw_image, True, False)
+        xiaozhang.image = pygame.transform.flip(
+            xiaozhang.raw_image, True, False)
         stats.dogflagxy = True
         stats.dogflagzf = False
 
@@ -181,7 +182,7 @@ def check_events(ig_settings, stats, buttons, back_button, windows,
         elif event.type == pygame.KEYDOWN:
             check_keydowm_events(
                 event, ig_settings, stats, xiaozhang, hot_dogs
-                )
+            )
 
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, xiaozhang)
@@ -199,7 +200,7 @@ def check_collisions(ig_settings, stats, xiaozhang, hot_dogs, dogfaces):
     if kill:
         for dogfaces in kill.values():
             stats.game_data["score"] += len(dogfaces) * \
-                                        ig_settings.dogface_points
+                ig_settings.dogface_points
             stats.game_data["score"] = int(round(stats.game_data["score"],
                                                  -1))
 
@@ -250,7 +251,7 @@ def check_game_schedule(ig_settings, stats, screen, hot_dogs, dogfaces):
                     ig_settings, screen, dogfaces,
                     random.choice((True, False)),
                     random.choice((True, False))
-                    )
+                )
 
         # 常规创建
         else:
@@ -259,7 +260,7 @@ def check_game_schedule(ig_settings, stats, screen, hot_dogs, dogfaces):
                     ig_settings, screen, dogfaces,
                     random.choice((True, False)),
                     random.choice((True, False))
-                    )
+                )
 
 
 # 内部检查合并
@@ -298,7 +299,8 @@ def update_backscreen(screen, stats, background, xiaozhang,
     print_score(screen, stats.scores[0], 0, 600,
                 font_size=48, font_color=(240, 60, 0))
     print_score(screen, stats.game_data["score"], 50, 600)
-    print_score(screen, stats.game_data["round_times"], 0, 1000, 48, (64, 16, 8))
+    print_score(
+        screen, stats.game_data["round_times"], 0, 1000, 48, (64, 16, 8))
     paste_life(screen, stats, xiaozhang)
 
     # 游戏按钮粘贴.
@@ -390,7 +392,7 @@ def shoot(ig_settings, stats, hot_dogs, xiaozhang):
         hot_dog.centery += 35
         hot_dog.image = pygame.transform.rotate(hot_dog.image, -90)
         hot_dogs.add(hot_dog)
-        
+
 
 # functions of dogfaces
 
@@ -402,13 +404,13 @@ def create_dogface(ig_settings, screen, dogfaces, dogface_rb, dogface_fx):
 
     # 生成位置
     if dogface_rb:
-        dogface.r = random.uniform(dogface.rect.width-1, 1199)
+        dogface.r = random.uniform(dogface.rect.width - 1, 1199)
         dogface.ymoving_right = True
         if not dogface_fx:
             dogface.b = 800
             dogface.ymoving_right = False
     else:
-        dogface.b = random.uniform(dogface.rect.height-1, 799)
+        dogface.b = random.uniform(dogface.rect.height - 1, 799)
         dogface.xmoving_right = True
         if not dogface_fx:
             dogface.r = 1200
@@ -429,8 +431,8 @@ def create_flee(ig_settings, screen, dogfaces, flee_rb, flee_fx):
     else:
         dogface_cd = dogface.rect.height
         screen_cd = ig_settings.screen_height
-    xnumber_dogfaces = screen_cd // (3*dogface_cd)
-    dogface_blank = (screen_cd - 3*dogface_cd*xnumber_dogfaces) // 2
+    xnumber_dogfaces = screen_cd // (3 * dogface_cd)
+    dogface_blank = (screen_cd - 3 * dogface_cd * xnumber_dogfaces) // 2
 
     # 创建几行/列小兵并确定位置
     for dogface_n in range(xnumber_dogfaces):
@@ -438,13 +440,13 @@ def create_flee(ig_settings, screen, dogfaces, flee_rb, flee_fx):
         dogface = DogFace(ig_settings, screen)
 
         if flee_rb:
-            dogface.r += dogface_blank + 2*dogface_cd*dogface_n
+            dogface.r += dogface_blank + 2 * dogface_cd * dogface_n
             dogface.ymoving_right = True
             if not flee_fx:
                 dogface.b = 800
                 dogface.ymoving_right = False
         else:
-            dogface.b += dogface_blank + 2*dogface_cd*dogface_n
+            dogface.b += dogface_blank + 2 * dogface_cd * dogface_n
             dogface.xmoving_right = True
             if not flee_fx:
                 dogface.r = 1200

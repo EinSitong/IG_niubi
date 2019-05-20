@@ -3,7 +3,7 @@ import pygame
 
 class Background:
     """背景"""
-    
+
     def __init__(self, screen):
         """初始化背景设置"""
 
@@ -23,7 +23,7 @@ class Background:
 
 class Cover(Background):
     """初始封面"""
-    
+
     def __init__(self, screen, photo_name):
         """继承背景设置"""
         super().__init__(screen)
